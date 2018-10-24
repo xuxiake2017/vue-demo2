@@ -3,7 +3,8 @@
   <h1>{{msg}}</h1>
   <h1 :v-bind:id="id"></h1>
   <div>
-    <el-button @click="message">这是按钮</el-button>
+    <el-button @click="message1">这是按钮1</el-button>
+    <el-button @click="message2">这是按钮2</el-button>
     <ul>
       <li v-for="n in even(numbers)" v-bind:key="n">{{ n }}</li>
     </ul>
@@ -28,9 +29,17 @@ export default {
     Message('这又是一条消息提示');
   },
   methods: {
-    message: function () {
+    message1: function () {
       // 全局的Message
       this.$message('这是一条消息提示');
+    },
+    message2: function () {
+      // 全局的Message
+      this.$notify({
+        title: 'HTML 片段',
+        dangerouslyUseHTMLString: true,
+        message: '<strong>这是 <i>HTML</i> 片段</strong>'
+      });
     },
     even: function (numbers) {
       return numbers.filter(function (number) {
@@ -39,27 +48,6 @@ export default {
     }
   }
 }
-
-// es6新特性
-let sum = (x, y) => x + y
-let test = () => {
-  console.log(`哈哈哈哈
-    我们
-    <html></html>`);
-  console.log(this);
-  let map = new Map();
-  map.set(1, 'apple');
-  map.set(2, 'pear');
-  map.set(3, 'banana');
-  console.log(map);
-  map.forEach((value, key) => {
-    console.log(`key:${key},value:${value}`)
-    console.log(this)
-  })
-};
-test();
-
-console.log(sum(1, 2));
 </script>
 
 <style scoped>
